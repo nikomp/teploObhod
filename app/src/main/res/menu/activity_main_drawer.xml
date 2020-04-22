@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_widgets_black_24dp"
+            android:title="@string/menu_orders" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_playlist_add_check_black_24dp"
+            android:title="@string/menu_checkups" />
+        <!--        <item
+                    android:id="@+id/nav_slideshow"
+                    android:icon="@drawable/ic_map_black_24dp"
+                    android:title="@string/menu_map" />-->
+    </group>
+
+    <item
+        android:orderInCategory="1"
+        android:title="@string/other">
+        <menu>
+            <item
+                android:id="@+id/nav_qr_scan"
+                android:icon="@drawable/ic_blur_circular_black_24dp"
+                android:orderInCategory="1"
+                android:title="@string/scan_qr" />
+            <item
+                android:id="@+id/nav_auth"
+                android:icon="@drawable/ic_input_black_24dp"
+                android:orderInCategory="1"
+                android:title="@string/by_auth" />
+            <item
+                android:id="@+id/nav_send_data"
+                android:icon="@drawable/ic_send_black_24dp"
+                android:orderInCategory="1"
+                android:title="@string/send_data" />
+        </menu>
+    </item>
+
+
+</menu>

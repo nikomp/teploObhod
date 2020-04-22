@@ -1,0 +1,89 @@
+<resources>
+    <string name="app_name">TeploObhod</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="url_site">Введите адрес сервера</string>
+    <string name="loginTitle">Логин</string>
+    <string name="passwordTitle">Пароль</string>
+    <string name="go">Войти</string>
+    <string name="title_activity_order">Список заявок</string>
+    <string name="title_activity_login">Авторизация</string>
+    <string name="title_activity_map">Карта</string>
+    <string name="auth_ok">Авторизация пройдена</string>
+    <string name="title_activity_order2">Список заявок</string>
+
+
+    <string name="menu_orders">Маршруты</string>
+    <string name="menu_checkups">Объекты обследования</string>
+    <string name="title_checkup_fragment">Обследованиe</string>
+    <string name="menu_map">Карта</string>
+    <string name="order_image_description">Состояние заявки</string>
+
+    <string name="access_token">pk.eyJ1Ijoibmlrb21wIiwiYSI6ImNrNjh3Y2x4dzA4MHczaG8zZnpoM2NwbXoifQ.BD4ONCVZvHrfVf0qIYp3UQ</string>
+    <string name="user_location_permission_explanation">бла-бла-бла</string>
+
+    <string name="not_permissions">Разрешения не выданы, приложение может работать неправильно</string>
+    <string name="not_internet">Нет подключения к сети</string>
+    <string name="server_not_avaliable">Сервер не доступен</string>
+    <string name="textview">Текст вопроса</string>
+    <string name="hint_spinner">Выберите значение из списка</string>
+    <string name="hint">hint</string>
+    <string name="other">Другое</string>
+    <string name="enter">Авторизация</string>
+    <string name="by_auth">К авторизации</string>
+    <string name="saveCheckup">Сохранить результаты</string>
+
+    <string name="notConfirmStep">Подтвердите все шаги чеклиста</string>
+    <string name="msgSaveCheckup">Чеклист сохранен</string>
+
+    <string name="msgDataSendOk">Данные отправлены на сервере</string>
+    <string name="msgRouteUserSendOk">Маршрут отправлен на сервер</string>
+    <string name="msgDataSendError">Ошибка! Данные не переданы на сервер</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="send_data">Отправить данные</string>
+    <string name="syncdb">Последняя синхронизация данных была %1$s. Повторить синхронизацию?</string>
+    <string name="syncdb2">Повторить синхронизацию?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="bottom_sheet_peek">Добавление нового объекта обследования</string>
+    <string name="kindorder_hint">Выберите вид объекта</string>
+    <string name="select_here">Выберите тип объекта</string>
+    <string name="object_name">Название объекта</string>
+    <string name="btnSave">Сохранить</string>
+    <string name="notInet">Сервер не доступен. Хотите работать в режиме офлайн</string>
+    <string name="btmSheetSaveInvalid">Заполните все данные об объекте</string>
+    <string name="unknown_requestCode">Неизвестный requestCode</string>
+    <string name="not_result_checklist">Нет заполненных чеклистов</string>
+    <string name="not_dir_with_photo">Папка с фото отсутствует</string>
+    <string name="btnAddPhoto">Добавить фото</string>
+    <string name="msgNotDataForSync">Нет данных для передачи на сервер</string>
+    <string name="btnAddCoordinates">Указать координаты</string>
+    <string name="not_coordinates">Координаты не заданы</string>
+    <string name="not_coordinates_error">Нужно задать координаты</string>
+    <string name="coordinates">Широта: %1$f, Долгота: %2$f</string>
+    <string name="photoResult">Фото сохранено в папке %1$s</string>
+    <string name="not_photo">Нет фотографий</string>
+    <string name="scan_qr">Сканировать QR код</string>
+    <string name="not_checkup">Ошибка. Нет такого чеклиста</string>
+    <string name="driveway">Проезд</string>
+
+    <string name="network_error_message">Ошибка сети</string>
+    <string name="remote_error_message">Ошибка удаленного сервера</string>
+    <string name="unknown_error_message">Неизвестная ошибка</string>
+
+    <string name="routeName">Маршрут %1$s</string>
+    <string name="transfersCount">Пересадок %1$s</string>
+    <string name="walkingDistance">Пешком %1$s</string>
+    <string name="icon_walker">иконка пешехода</string>
+    <string name="icon_next">следующая секция</string>
+    <string name="order_refresh">Список заявок обновлен</string>
+
+    <string name="isCheckupWithResult">Есть чеклисты с неподтвержденными шагами</string>
+</resources>

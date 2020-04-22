@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0759A3</color>
+    <color name="colorPrimaryDark">#002F58</color>
+    <color name="colorAccent">#4788C7</color>
+
+    <color name="colorCardItem">#FFFFFF</color>
+    <color name="colorListBackground">#F4F5F5</color>
+    <color name="colorCardSelect">#80CBC4</color>
+    <color name="colorTitle">#ffffff</color>
+
+    <color name="error">#FF002E</color>
+
+    <color name="hypertext">#0082E5</color>
+</resources>
