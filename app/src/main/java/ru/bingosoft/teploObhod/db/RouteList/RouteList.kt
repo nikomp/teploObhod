@@ -19,6 +19,8 @@ data class RouteList(
     var route: Long = 0,
     @SerializedName("routeTemplate")
     var routeTemplate: Long = 0,
+    @SerializedName("nameRouteTemplate")
+    var nameRouteTemplate: String,
     @SerializedName("user")
     var user: Long = 0,
     @SerializedName("datetime")

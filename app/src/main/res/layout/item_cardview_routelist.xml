@@ -20,48 +20,81 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/targetImage"
-                android:layout_width="27dp"
-                android:layout_height="27dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
                 android:adjustViewBounds="true"
                 android:contentDescription="@string/order_image_description"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_flash_on_black_24dp" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateRoute"
+                app:srcCompat="@drawable/ic_state_red" />
 
             <TextView
                 android:id="@+id/route"
-                android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:fontFamily="@font/roboto_thin"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/targetImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="13sp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Маршрут 1" />
+                tools:text="Обход 1" />
 
             <TextView
                 android:id="@+id/dateRoute"
                 android:layout_width="0dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_medium"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="21 апр. 10:00" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/route"
-                tools:text="2020-04-21 10:00:00" />
+                app:srcCompat="@drawable/ic_schema" />
+
+            <TextView
+                android:id="@+id/viewSchema"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/view_schema"
+                app:layout_constraintStart_toEndOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/route" />
+
+            <TextView
+                android:id="@+id/untilTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/roboto_medium"
+                app:layout_constraintEnd_toStartOf="@+id/targetImage"
+                app:layout_constraintTop_toBottomOf="@+id/dateRoute"
+                tools:text="3ч 12мин" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

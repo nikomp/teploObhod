@@ -32,21 +32,44 @@
                 android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/roboto_bold"
                 android:text="@string/textview"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="15sp" />
 
-
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnPhoto"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btnAddPhoto" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:background="@color/buttonBackgroundLight"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/btnAddPhoto"
+                android:textColor="@color/hypertext"
+                app:backgroundTint="@color/buttonBackgroundLight"
+                app:cornerRadius="22dp" />
 
             <TextView
                 android:id="@+id/photoResult"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/not_photo" />
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="@string/not_photo"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +86,7 @@
                     android:textColor="@color/error"
                     android:visibility="invisible" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fabCheck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -72,7 +95,7 @@
                     android:clickable="true"
                     android:focusable="true"
                     app:fabCustomSize="32dp"
-                    app:srcCompat="@drawable/ic_check_black_8dp" />
+                    app:srcCompat="@drawable/ic_check_black_8dp" />-->
             </LinearLayout>
 
 

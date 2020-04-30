@@ -41,6 +41,10 @@ class SharedPrefSaver(ctx: Context) {
         editor.apply()
     }
 
+    fun getToken(): String {
+        return sharedPreference.getString(TOKEN, "") ?: ""
+    }
+
     fun getLogin(): String {
         return sharedPreference.getString(LOGIN, "") ?: ""
     }

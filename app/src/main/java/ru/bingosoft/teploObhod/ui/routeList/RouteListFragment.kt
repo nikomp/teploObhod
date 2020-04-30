@@ -16,19 +16,19 @@ import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.alert_not_internet.view.*
 import kotlinx.android.synthetic.main.alert_syncdb.view.*
 import kotlinx.android.synthetic.main.fragment_routelist.*
-
 import ru.bingosoft.teploObhod.R
 import ru.bingosoft.teploObhod.db.RouteList.RouteList
 import ru.bingosoft.teploObhod.models.Models
-import ru.bingosoft.teploObhod.ui.checkuplist.CheckupListFragment
 import ru.bingosoft.teploObhod.ui.login.LoginActivity
 import ru.bingosoft.teploObhod.ui.login.LoginContractView
 import ru.bingosoft.teploObhod.ui.login.LoginPresenter
 import ru.bingosoft.teploObhod.ui.mainactivity.FragmentsContractActivity
+import ru.bingosoft.teploObhod.ui.qrlist.QRListFragment
 import ru.bingosoft.teploObhod.util.Const
 import ru.bingosoft.teploObhod.util.SharedPrefSaver
 import ru.bingosoft.teploObhod.util.Toaster
 import timber.log.Timber
+import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
 
@@ -62,7 +62,7 @@ class RouteListFragment : Fragment(), LoginContractView, RouteListContractView,
         root = inflater.inflate(R.layout.fragment_routelist, container, false)
 
         (this.requireActivity() as AppCompatActivity).supportActionBar?.setTitle(R.string.menu_orders)
-
+        //(this.requireActivity() as AppCompatActivity).supportActionBar?.setIcon(R.drawable.ic_navmenu)
 
         // Если логин/пароль есть не авторизуемся
         if (sharedPref.getLogin() == "" && sharedPref.getPassword() == "") {
@@ -250,7 +250,7 @@ class RouteListFragment : Fragment(), LoginContractView, RouteListContractView,
         sharedPref.saveUser(user)
     }
 
-    override fun showOrders(orders: List<RouteList>) {
+    override fun showRoutes(routes: List<RouteList>) {
 
         // инициализируем контейнер SwipeRefreshLayout
         val swipeRefreshLayout = root.findViewById(R.id.srl_container) as SwipeRefreshLayout
@@ -263,7 +263,10 @@ class RouteListFragment : Fragment(), LoginContractView, RouteListContractView,
 
         val ordersRecyclerView = root.findViewById(R.id.routelist_recycler_view) as RecyclerView
         ordersRecyclerView.layoutManager = LinearLayoutManager(this.activity)
-        val adapter = RouteListAdapter(orders, this, this.requireContext())
+
+        Timber.d("routes=$routes")
+
+        val adapter = RouteListAdapter(routes, this, this.requireContext())
         ordersRecyclerView.adapter = adapter
     }
 
@@ -281,21 +284,27 @@ class RouteListFragment : Fragment(), LoginContractView, RouteListContractView,
         //Включаем фрагмент со списком Обследований для конкретной заявки
         val bundle = Bundle()
         bundle.putBoolean("checkUpForOrder", true)
+        val strDate = SimpleDateFormat(
+            "dd MMM HH:mm",
+            Locale("ru", "RU")
+        ).format(currentRoute.dateRoute)
+
+
+        bundle.putString("strDate", strDate)
         bundle.putLong("idOrder", currentRoute.id)
 
-        val fragmentCheckupList = CheckupListFragment()
-        fragmentCheckupList.arguments = bundle
+        val fragmentQRList = QRListFragment()
+        fragmentQRList.arguments = bundle
         val fragmentManager = this.requireActivity().supportFragmentManager
 
         fragmentManager.beginTransaction()
-            .replace(R.id.nav_host_fragment, fragmentCheckupList, "checkup_list_fragment_tag")
+            .replace(R.id.nav_host_fragment, fragmentQRList, "checkup_list_fragment_tag")
             .addToBackStack(null)
             .commit()
 
         fragmentManager.executePendingTransactions()
 
-        (this.requireActivity() as FragmentsContractActivity).setChecupListOrder(currentRoute)
-
+        (this.requireActivity() as FragmentsContractActivity).setQRListRoute(currentRoute)
 
     }
 

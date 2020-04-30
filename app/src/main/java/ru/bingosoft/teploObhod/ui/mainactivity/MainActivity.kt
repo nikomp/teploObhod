@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Location
 import android.location.LocationManager
 import android.net.Uri
 import android.os.Build
@@ -32,7 +31,6 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.load.model.LazyHeaders
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.navigation.NavigationView
-import com.yandex.mapkit.geometry.Point
 import dagger.android.AndroidInjection
 import ru.bingosoft.teploObhod.BuildConfig
 import ru.bingosoft.teploObhod.R
@@ -41,14 +39,13 @@ import ru.bingosoft.teploObhod.db.Checkup.Checkup
 import ru.bingosoft.teploObhod.db.RouteList.RouteList
 import ru.bingosoft.teploObhod.models.Models
 import ru.bingosoft.teploObhod.ui.checkup.CheckupFragment
-import ru.bingosoft.teploObhod.ui.checkuplist.CheckupListFragment
 import ru.bingosoft.teploObhod.ui.login.LoginActivity
+import ru.bingosoft.teploObhod.ui.qrlist.QRListFragment
 import ru.bingosoft.teploObhod.util.Const
 import ru.bingosoft.teploObhod.util.Const.MessageCode.REFUSED_PERMISSION
 import ru.bingosoft.teploObhod.util.Const.MessageCode.REPEATEDLY_REFUSED
 import ru.bingosoft.teploObhod.util.Const.RequestCodes.PHOTO
 import ru.bingosoft.teploObhod.util.Const.RequestCodes.QR_SCAN
-import ru.bingosoft.teploObhod.util.OtherUtil
 import ru.bingosoft.teploObhod.util.SharedPrefSaver
 import ru.bingosoft.teploObhod.util.Toaster
 import timber.log.Timber
@@ -70,11 +67,10 @@ class MainActivity : AppCompatActivity(), FragmentsContractActivity,
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var navController: NavController
 
-    var mapPoint: Point = Point(0.0, 0.0)
-    var controlMapId: Int = 0
     var photoDir: String = ""
     var lastKnownFilenamePhoto = ""
     var photoStep: Models.TemplateControl? = null
+    var images: List<String>? = listOf()
     private lateinit var locationManager: LocationManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -285,11 +281,11 @@ class MainActivity : AppCompatActivity(), FragmentsContractActivity,
             Timber.d("onBackPressed_checkup_list_fragment_tag")
             val idOrder = fragment2.arguments?.getLong("idOrder")
             if (idOrder != null) {
-                (fragment2 as CheckupListFragment).checkupListPresenter.loadCheckupListByOrder(
+                (fragment2 as QRListFragment).QRListPresenter.loadQRListByRoute(
                     idOrder
                 ) // Грузим объекты только выбранной заявки
             } else {
-                (fragment2 as CheckupListFragment).checkupListPresenter.loadCheckupList() // Грузим все объекты
+                (fragment2 as QRListFragment).QRListPresenter.loadQRList() // Грузим все объекты
             }
         }
     }
@@ -301,39 +297,26 @@ class MainActivity : AppCompatActivity(), FragmentsContractActivity,
         cf?.dataIsLoaded(checkup)
     }
 
-    override fun setChecupListOrder(order: RouteList) {
+    override fun setQRListRoute(route: RouteList) {
         Timber.d("setChecupListOrder from Activity")
         val clf =
-            this.supportFragmentManager.findFragmentByTag("checkup_list_fragment_tag") as? CheckupListFragment
-        clf?.showCheckupListOrder(order)
+            this.supportFragmentManager.findFragmentByTag("checkup_list_fragment_tag") as? QRListFragment
+        clf?.showQRListRoute(route)
     }
 
-    override fun setCoordinates(point: Point, controlId: Int) {
+    /*override fun setCoordinates(point: Point, controlId: Int) {
         Timber.d("setCoordinates from Activity")
         mapPoint = point
         this.controlMapId = controlId
-    }
+    }*/
 
     private fun setPhotoResult() {
-        var photoLocation: Location? = Location(LocationManager.GPS_PROVIDER)
-        try {
-            photoLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-        } catch (e: SecurityException) {
-            Timber.d("Не удается запросить обновление местоположения, игнорировать ${e.printStackTrace()}")
-        } catch (e: IllegalArgumentException) {
-            Timber.d("GPS провайдер не существует ${e.printStackTrace()}")
-        }
-        Timber.d("locationPhoto=${photoLocation?.latitude}_${photoLocation?.longitude}")
-
-        Timber.d("lastKnownFilenamePhoto=${lastKnownFilenamePhoto}")
-        OtherUtil().saveExifLocation(lastKnownFilenamePhoto, photoLocation)
-
-
         Timber.d("setPhotoResult from Activity")
         val cf =
             this.supportFragmentManager.findFragmentByTag("checkup_fragment_tag") as? CheckupFragment
-        cf?.setPhotoResult(photoStep?.id, "DCIM\\PhotoForApp\\$photoDir")
+        cf?.setPhotoResult(photoStep?.id, "$photoDir")
         photoStep?.resvalue = photoDir
+        photoStep?.answered = true
 
     }
 

@@ -3,10 +3,9 @@ package ru.bingosoft.teploObhod.di
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import ru.bingosoft.teploObhod.ui.checkup.CheckupFragment
-import ru.bingosoft.teploObhod.ui.checkuplist.CheckupListFragment
-
 import ru.bingosoft.teploObhod.ui.login.LoginActivity
 import ru.bingosoft.teploObhod.ui.mainactivity.MainActivity
+import ru.bingosoft.teploObhod.ui.qrlist.QRListFragment
 import ru.bingosoft.teploObhod.ui.routeList.RouteListFragment
 
 @Module
@@ -19,7 +18,7 @@ abstract class ActivityBuilder {
     abstract fun bindCheckupActivity(): CheckupFragment
 
     @ContributesAndroidInjector()
-    abstract fun bindCheckupListFragment(): CheckupListFragment
+    abstract fun bindCheckupListFragment(): QRListFragment
 
 
     @ContributesAndroidInjector()

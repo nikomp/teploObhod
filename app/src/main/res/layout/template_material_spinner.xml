@@ -32,20 +32,36 @@
                 android:id="@+id/question"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/roboto_bold"
                 android:text="@string/textview"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:textSize="15sp" />
 
             <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
                 android:id="@+id/android_material_design_spinner"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:ellipsize="end"
+                android:fontFamily="@font/roboto_medium"
                 android:hint="@string/hint_spinner"
                 android:singleLine="true"
                 android:textColorHint="#05ab9a"
+                android:textSize="15sp"
                 app:met_floatingLabel="normal" />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
+            <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fabCheck"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -54,7 +70,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 app:fabCustomSize="32dp"
-                app:srcCompat="@drawable/ic_check_black_8dp" />
+                app:srcCompat="@drawable/ic_check_black_8dp" />-->
 
         </LinearLayout>
 

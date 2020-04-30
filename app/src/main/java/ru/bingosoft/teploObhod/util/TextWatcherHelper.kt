@@ -4,6 +4,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import ru.bingosoft.teploObhod.models.Models
+import timber.log.Timber
 
 class TextWatcherHelper(
     val control: Models.TemplateControl,
@@ -11,9 +12,18 @@ class TextWatcherHelper(
     val v: View
 ) : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
-        control.checked = false
+        control.answered = true
         control.resvalue = s.toString()
-        uiCreator.changeChecked(v, control)
+
+        Timber.d(s.toString())
+        val posValue = control.value.indexOf(s.toString())
+        Timber.d("posValue=$posValue")
+        if (control.typevalue.isNotEmpty()) {
+            val valutype = control.typevalue[posValue]
+            control.error = valutype == "2"
+            uiCreator.changeChecked(v, control)
+        }
+
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

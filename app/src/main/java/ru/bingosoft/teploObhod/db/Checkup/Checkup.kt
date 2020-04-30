@@ -3,30 +3,30 @@ package ru.bingosoft.teploObhod.db.Checkup
 import androidx.room.*
 import androidx.room.ForeignKey.CASCADE
 import com.google.gson.JsonObject
-import ru.bingosoft.teploObhod.db.RouteList.RouteList
+import ru.bingosoft.teploObhod.db.QRList.QRList
 import ru.bingosoft.teploObhod.util.JsonConverter
 
 @Entity(
     tableName = "Checkup",
     foreignKeys = arrayOf(
         ForeignKey(
-            entity = RouteList::class,
+            entity = QRList::class,
             parentColumns = ["id"],
-            childColumns = ["idOrder"],
+            childColumns = ["idQr"],
             onDelete = CASCADE
         )
     ),
-    indices = [Index("idOrder")]
+    indices = [Index("idQr")]
 )
 @TypeConverters(JsonConverter::class)
 data class Checkup(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0,
-    var guid: String,
-    var kindObject: String,
-    var nameObject: String,
+    var guidQ: String,
+    var guidQr: String,
+    var guidM: String,
     var text: JsonObject? = null,
-    var idOrder: Long? = null,
+    var idQr: Long? = null,
     var textResult: JsonObject? = null,
     var sync: Boolean = false
 )

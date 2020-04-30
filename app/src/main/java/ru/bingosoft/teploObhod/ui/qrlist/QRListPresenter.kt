@@ -1,4 +1,4 @@
-package ru.bingosoft.teploObhod.ui.checkuplist
+package ru.bingosoft.teploObhod.ui.qrlist
 
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -7,17 +7,17 @@ import ru.bingosoft.teploObhod.db.AppDatabase
 import timber.log.Timber
 import javax.inject.Inject
 
-class CheckupListPresenter @Inject constructor(val db: AppDatabase) {
-    var view: CheckupListContractView? = null
+class QRListPresenter @Inject constructor(val db: AppDatabase) {
+    var view: QRListContractView? = null
 
     private lateinit var disposable: Disposable
 
-    fun attachView(view: CheckupListContractView) {
+    fun attachView(view: QRListContractView) {
         this.view = view
     }
 
-    fun loadCheckupList() {
-        disposable = db.checkupDao().getAll()
+    fun loadQRList() {
+        disposable = db.qrListDao().getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -25,17 +25,17 @@ class CheckupListPresenter @Inject constructor(val db: AppDatabase) {
                 Timber.d("Число строк=${it.size}")
                 Timber.d(it.toString())
 
-                view?.showCheckups(it)
+                //view?.showCheckups(it)
             }
 
     }
 
-    fun loadCheckupListByOrder(idOrder: Long) {
-        disposable = db.checkupDao().getCheckupsOrder(idOrder)
+    fun loadQRListByRoute(idRoute: Long) {
+        disposable = db.qrListDao().getByRoute(idRoute)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
-                Timber.d("loadCheckupListByOrder")
+                Timber.d("loadQRListByRoute")
                 Timber.d(it.toString())
                 view?.showCheckups(it)
             }

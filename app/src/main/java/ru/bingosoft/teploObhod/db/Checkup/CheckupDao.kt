@@ -11,10 +11,10 @@ interface CheckupDao {
     @Query("SELECT * FROM checkup WHERE id = :id")
     fun getById(id: Long): Flowable<Checkup>
 
-    @Query("SELECT * FROM checkup WHERE idOrder = :id")
-    fun getCheckupsOrder(id: Long): Flowable<List<Checkup>>
+    /*@Query("SELECT * FROM checkup WHERE idOrder = :id")
+    fun getCheckupsOrder(id: Long): Flowable<List<Checkup>>*/
 
-    @Query("SELECT id FROM checkup WHERE idOrder = :id")
+    @Query("SELECT id FROM checkup WHERE idQr = :id")
     fun getCheckupIdByOrder(id: Long): Long
 
     @Query("SELECT * FROM checkup where textResult is not null and sync=0 and textResult not like '%\"checked\":false%'")

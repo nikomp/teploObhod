@@ -12,4 +12,12 @@
     <color name="error">#FF002E</color>
 
     <color name="hypertext">#0082E5</color>
+    <color name="buttonBackground">#297BE7</color>
+    <color name="buttonBackgroundLight">#E6F3FD</color>
+    <color name="textInputBorder">#CBC9C5</color>
+    <color name="minusTime">#E24A36</color>
+    <color name="inactive_text">#7C838B</color>
+
+    <color name="errorAnswere">#E24A36</color>
+    <color name="errorNo">#29A33C</color>
 </resources>

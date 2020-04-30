@@ -1,6 +1,6 @@
 package ru.bingosoft.teploObhod.util
 
-import com.yandex.mapkit.geometry.Point
+//import com.yandex.mapkit.geometry.Point
 
 class Const {
     object LogTags {
@@ -41,15 +41,5 @@ class Const {
         const val DISABLE_LOCATION = 3 //пользователь выключил GPS
     }
 
-    object Location {
-        val TARGET_POINT = Point(56.3287, 44.002) //Нижний Новгород
-
-        const val ZOOM_LEVEL = 12.0f
-        const val DESIRED_ACCURACY = 0.0
-        const val MINIMAL_TIME = 0L
-        const val MINIMAL_DISTANCE = 50.0
-        const val USE_IN_BACKGROUND = false
-
-    }
 
 }

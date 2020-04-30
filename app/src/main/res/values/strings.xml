@@ -19,7 +19,7 @@
 
 
     <string name="menu_orders">Маршруты</string>
-    <string name="menu_checkups">Объекты обследования</string>
+    <string name="menu_checkups">Список QR меток</string>
     <string name="title_checkup_fragment">Обследованиe</string>
     <string name="menu_map">Карта</string>
     <string name="order_image_description">Состояние заявки</string>
@@ -36,7 +36,8 @@
     <string name="other">Другое</string>
     <string name="enter">Авторизация</string>
     <string name="by_auth">К авторизации</string>
-    <string name="saveCheckup">Сохранить результаты</string>
+    <string name="saveCheckup">Сохранить</string>
+    <string name="send_data2">Отправить</string>
 
     <string name="notConfirmStep">Подтвердите все шаги чеклиста</string>
     <string name="msgSaveCheckup">Чеклист сохранен</string>
@@ -63,6 +64,7 @@
     <string name="not_result_checklist">Нет заполненных чеклистов</string>
     <string name="not_dir_with_photo">Папка с фото отсутствует</string>
     <string name="btnAddPhoto">Добавить фото</string>
+    <string name="btnDeleteAllPhoto">Удалить все</string>
     <string name="msgNotDataForSync">Нет данных для передачи на сервер</string>
     <string name="btnAddCoordinates">Указать координаты</string>
     <string name="not_coordinates">Координаты не заданы</string>
@@ -84,6 +86,12 @@
     <string name="icon_walker">иконка пешехода</string>
     <string name="icon_next">следующая секция</string>
     <string name="order_refresh">Список заявок обновлен</string>
+    <string name="view_schema">Смотреть на схеме</string>
 
     <string name="isCheckupWithResult">Есть чеклисты с неподтвержденными шагами</string>
+    <string name="title_alert_schema">Схема маршрута</string>
+    <string name="bad_answere">Отклонение от нормы</string>
+    <string name="errorMsg">Нарушений: %1$s</string>
+    <string name="all_right">Всё в порядке</string>
+
 </resources>

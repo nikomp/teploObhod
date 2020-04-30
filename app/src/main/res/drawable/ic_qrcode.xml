@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <path
+        android:fillColor="#A1A6AC"
+        android:fillType="evenOdd"
+        android:pathData="M3 4C3 3.44772 3.44772 3 4 3H10C10.5523 3 11 3.44772 11 4V10C11 10.5523 10.5523 11 10 11H4C3.44772 11 3 10.5523 3 10V4ZM5 9V5H9V9H5Z" />
+    <path
+        android:fillColor="#A1A6AC"
+        android:fillType="evenOdd"
+        android:pathData="M13 4C13 3.44772 13.4477 3 14 3H20C20.5523 3 21 3.44772 21 4V10C21 10.5523 20.5523 11 20 11H14C13.4477 11 13 10.5523 13 10V4ZM15 9V5H19V9H15Z" />
+    <path
+        android:fillColor="#A1A6AC"
+        android:fillType="evenOdd"
+        android:pathData="M4 13C3.44772 13 3 13.4477 3 14V20C3 20.5523 3.44772 21 4 21H10C10.5523 21 11 20.5523 11 20V14C11 13.4477 10.5523 13 10 13H4ZM5 15V19H9V15H5Z" />
+    <path
+        android:fillColor="#A1A6AC"
+        android:pathData="M13 13.5C13 13.2239 13.2239 13 13.5 13H15.5C15.7761 13 16 13.2239 16 13.5V15.5C16 15.7761 15.7761 16 15.5 16H13.5C13.2239 16 13 15.7761 13 15.5V13.5Z" />
+    <path
+        android:fillColor="#A1A6AC"
+        android:pathData="M18.5 13C18.2239 13 18 13.2239 18 13.5V15.5C18 15.7761 18.2239 16 18.5 16H20.5C20.7761 16 21 15.7761 21 15.5V13.5C21 13.2239 20.7761 13 20.5 13H18.5Z" />
+    <path
+        android:fillColor="#A1A6AC"
+        android:pathData="M16.5 16C16.2239 16 16 16.2239 16 16.5V17.5C16 17.7761 16.2239 18 16.5 18H17.5C17.7761 18 18 17.7761 18 17.5V16.5C18 16.2239 17.7761 16 17.5 16H16.5Z" />
+    <path
+        android:fillColor="#A1A6AC"
+        android:pathData="M18.5 18C18.2239 18 18 18.2239 18 18.5V20.5C18 20.7761 18.2239 21 18.5 21H20.5C20.7761 21 21 20.7761 21 20.5V18.5C21 18.2239 20.7761 18 20.5 18H18.5Z" />
+    <path
+        android:fillColor="#A1A6AC"
+        android:pathData="M13 18.5C13 18.2239 13.2239 18 13.5 18H15.5C15.7761 18 16 18.2239 16 18.5V20.5C16 20.7761 15.7761 21 15.5 21H13.5C13.2239 21 13 20.7761 13 20.5V18.5Z" />
+</vector>

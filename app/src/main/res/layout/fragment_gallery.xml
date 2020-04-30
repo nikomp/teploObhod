@@ -18,6 +18,7 @@
             android:id="@+id/mainControl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorListBackground"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,14 +29,33 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/mbSaveCheckup"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/buttonBackground"
+        android:fontFamily="@font/roboto_medium"
         android:onClick="onClick"
         android:text="@string/saveCheckup"
+        app:backgroundTint="@color/buttonBackground"
+        app:cornerRadius="22dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/mbSendCheckup"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/mbSendCheckup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/buttonBackground"
+        android:fontFamily="@font/roboto_medium"
+        android:onClick="onClick"
+        android:text="@string/send_data2"
+        app:backgroundTint="@color/buttonBackground"
+        app:cornerRadius="22dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/mbSaveCheckup" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

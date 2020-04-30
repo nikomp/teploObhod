@@ -135,23 +135,4 @@ dependencies {
     // Glide Для работы с картинками
     implementation 'com.github.bumptech.glide:glide:4.7.1'
 
-
-    // Основная библиотека MapKit.
-    implementation 'com.yandex.android:mapkit:3.5.0'
-    // Дополнительные модули MapKit.
-    // Удалите зависимости если ваше приложение не использует их.
-    implementation 'com.yandex.android:directions:3.5.0'
-    implementation 'com.yandex.android:places:3.5.0'
-    implementation 'com.yandex.android:search:3.5.0'
-    implementation 'com.yandex.android:transport:3.5.0'
-
-    //Получение локации пользователя
-    implementation 'com.google.android.gms:play-services-location:17.0.0'
-
-    // Для переноса секций маршрута
-    implementation 'com.google.android:flexbox:2.0.1'
-
-    // Для Exif данных в jpeg файлах
-    implementation 'androidx.exifinterface:exifinterface:1.0.0'
-
 }

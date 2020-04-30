@@ -109,6 +109,8 @@ class MainActivityPresenter @Inject constructor(
                     val actionBody =
                         "reverseSync".toRequestBody("multipart/form-data".toMediaType())
 
+                    Timber.d("Данные=${Gson().toJson(checkups)}")
+
                     val jsonBody = Gson().toJson(checkups)
                         .toRequestBody("application/json; charset=utf-8".toMediaType())
 
@@ -208,11 +210,11 @@ class MainActivityPresenter @Inject constructor(
             }
     }
 
-    fun openCheckup(fragmentManager: FragmentManager, orderId: Long) {
+    fun openCheckup(fragmentManager: FragmentManager, idQr: Long) {
         Timber.d("openCheckup")
         // Получим информацию о чеклисте, по orderId
         Single.fromCallable {
-            val idCheckup = db.checkupDao().getCheckupIdByOrder(orderId)
+            val idCheckup = db.checkupDao().getCheckupIdByOrder(idQr)
             Timber.d("idCheckup=$idCheckup")
             //Загружаем чеклист
             val bundle = Bundle()

@@ -2,7 +2,7 @@ package ru.bingosoft.teploObhod.models
 
 import com.google.gson.annotations.SerializedName
 import ru.bingosoft.teploObhod.db.Checkup.Checkup
-import ru.bingosoft.teploObhod.db.CheckupGuide.CheckupGuide
+import ru.bingosoft.teploObhod.db.QRList.QRList
 import ru.bingosoft.teploObhod.db.RouteList.RouteList
 import java.util.*
 
@@ -51,9 +51,9 @@ class Models {
         var lon: Double
     )
 
-    class OrderList(
+    class DataList(
         @SerializedName("success") var success: Boolean = false,
-        @SerializedName("data") var orders: List<RouteList> = listOf()
+        @SerializedName("data") var data: List<RouteList> = listOf()
     )
 
     class CheckupList(
@@ -62,7 +62,7 @@ class Models {
     )
 
     class CheckupGuideList(
-        @SerializedName("data") var guides: List<CheckupGuide> = listOf()
+        @SerializedName("data") var guides: List<QRList> = listOf()
     )
 
     class ControlList(
@@ -74,11 +74,13 @@ class Models {
         @SerializedName("guid") var guid: String = "",
         @SerializedName("type") var type: String = "",
         @SerializedName("value") var value: Array<String> = arrayOf(),
+        @SerializedName("typevalue") var typevalue: Array<String> = arrayOf(),
         @SerializedName("question") var question: String = "",
         @SerializedName("hint") var hint: String = "",
         @SerializedName("resvalue") var resvalue: String = "",
 
-        var checked: Boolean = false
+        var answered: Boolean = false,
+        var error: Boolean = false
     )
 
     /*class PhotoResult(

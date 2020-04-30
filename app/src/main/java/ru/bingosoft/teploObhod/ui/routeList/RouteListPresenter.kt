@@ -28,15 +28,13 @@ class RouteListPresenter @Inject constructor(
         disposable = db.routeListDao().getAll()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
+            .subscribe({
                 Timber.d("Данные получили из БД")
                 Timber.d(it.toString())
-                view?.showOrders(it)
-            }
-
-        Timber.d("ОК")
-
-
+                view?.showRoutes(it)
+            }, { error ->
+                error.printStackTrace()
+            })
     }
 
 
@@ -55,6 +53,7 @@ class RouteListPresenter @Inject constructor(
                 route = 3,
                 guid = "d4ef2847-a981-47b6-8e20-28e3bd31d83e",
                 routeTemplate = 2,
+                nameRouteTemplate = "Маршрут 2",
                 user = 2,
                 dateRoute = SimpleDateFormat(
                     "yyyy-MM-dd H:m:s",
@@ -67,6 +66,7 @@ class RouteListPresenter @Inject constructor(
                 route = 2,
                 guid = "a02c5db2-3f4b-437f-ae36-cc40decac2cf",
                 routeTemplate = 2,
+                nameRouteTemplate = "Маршрут 2",
                 user = 2,
                 dateRoute = SimpleDateFormat(
                     "yyyy-MM-dd H:m:s",

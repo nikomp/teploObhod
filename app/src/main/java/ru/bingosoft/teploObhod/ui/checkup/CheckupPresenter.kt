@@ -23,40 +23,25 @@ class CheckupPresenter @Inject constructor(val db: AppDatabase) {
     }
 
     fun loadCheckup(id: Long) {
-        Timber.d("loadCheckups")
+        Timber.d("loadCheckup")
         disposable = db.checkupDao().getById(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                Timber.d("Обследования получили из БД")
-                Timber.d(it.toString())
+            .subscribe(
+                {
+                    Timber.d("Обследования получили из БД")
+                    Timber.d(it.toString())
 
-                view?.dataIsLoaded(it)
-            }
+                    view?.dataIsLoaded(it)
+                }, { error ->
+                    error.printStackTrace()
+                }
 
-        Timber.d("ОК")
-
+            )
     }
 
     fun saveCheckup(uiCreator: UICreator) {
         Timber.d("Сохраняем данные чеклиста")
-        /*val filterControls=uiCreator.controlList.list.filter { !it.checked }
-        if (filterControls.isNotEmpty()) {
-            view?.showCheckupMessage(R.string.notConfirmStep)
-        } else {
-            val resCheckup= Gson().toJsonTree(uiCreator.controlList, Models.ControlList::class.java)
-            uiCreator.checkup.textResult=resCheckup as JsonObject
-
-            disposable=Single.fromCallable{
-                db.checkupDao().insert(uiCreator.checkup)
-            }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{_->
-                view?.showCheckupMessage(R.string.msgSaveCheckup)
-            }
-        }*/
-
         val resCheckup = Gson().toJsonTree(uiCreator.controlList, Models.ControlList::class.java)
         uiCreator.checkup.textResult = resCheckup as JsonObject
 
@@ -67,9 +52,33 @@ class CheckupPresenter @Inject constructor(val db: AppDatabase) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ _ ->
                 view?.showCheckupMessage(R.string.msgSaveCheckup)
-            }, { trowable ->
-                trowable.printStackTrace()
+                updateAnsweredCount(uiCreator)
+                updateErrorCount(uiCreator)
+            }, { error ->
+                error.printStackTrace()
             })
+    }
+
+    private fun updateAnsweredCount(uiCreator: UICreator) {
+        // Отфильтруем только вопросы у которых answered=true
+        val filterControls = uiCreator.controlList.list.filter { it.answered }
+
+        disposable = Single.fromCallable {
+            db.qrListDao().updateAnsweredCount(uiCreator.checkup.idQr, filterControls.size)
+        }
+            .subscribeOn(Schedulers.io())
+            .subscribe()
+    }
+
+    private fun updateErrorCount(uiCreator: UICreator) {
+        // Отфильтруем только вопросы у которых error=true
+        val filterControls = uiCreator.controlList.list.filter { it.error }
+
+        disposable = Single.fromCallable {
+            db.qrListDao().updateErrorCount(uiCreator.checkup.idQr, filterControls.size)
+        }
+            .subscribeOn(Schedulers.io())
+            .subscribe()
     }
 
     fun onDestroy() {

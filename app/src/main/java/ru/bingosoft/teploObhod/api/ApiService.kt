@@ -19,10 +19,15 @@ interface ApiService {
         @Body uuid: RequestBody
     ): Single<Models.Token>
 
-    @GET("procs/androidAPI.php")
-    fun getListOrder(
+    /*@GET("procs/androidAPI.php")
+    fun getListRoute(
         @Query("action") action: String
-    ): Single<Models.OrderList>
+    ): Single<Models.OrderList>*/
+
+    @POST("/registryservice/plugins/execute/UnloadEmployeeDataForTheCurrentDayFromByPassCommand")
+    @Headers("Content-Type: application/json")
+    fun getListRoute(
+    ): Single<Models.DataList>
 
     @GET("procs/androidAPI.php")
     fun getInfoAboutCurrentUser(

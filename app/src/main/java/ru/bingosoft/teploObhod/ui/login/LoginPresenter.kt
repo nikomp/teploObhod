@@ -122,7 +122,7 @@ class LoginPresenter @Inject constructor(
 
     fun syncDB() {
         Timber.d("syncDB")
-        disposable = syncOrder()
+        disposable = syncRoute()
             .andThen(syncCheckupGuide())
             .andThen(apiService.getCheckups(action = "getCheckups"))
             .subscribeOn(Schedulers.io())
@@ -162,17 +162,17 @@ class LoginPresenter @Inject constructor(
             })
     }
 
-    private fun syncOrder(): Completable = apiService.getListOrder(action = "getAllOrders")
+    private fun syncRoute(): Completable = apiService.getListRoute()
         .subscribeOn(Schedulers.io())
         .map { response ->
             if (!response.success) {
-                throw ThrowHelper("Нет заявок")
+                throw ThrowHelper("Нет маршрутов")
             } else {
-                val data: Models.OrderList = response
+                val data: Models.DataList = response
                 Single.fromCallable {
                     db.routeListDao().clearOrders() // Перед вставкой очистим таблицу
-                    Timber.d("data.orders=${data.orders}")
-                    data.orders.forEach {
+                    Timber.d("data.orders=${data.data}")
+                    data.data.forEach {
                         db.routeListDao().insert(it)
                     }
 
@@ -200,9 +200,9 @@ class LoginPresenter @Inject constructor(
 
                 val data: Models.CheckupGuideList = response
                 Single.fromCallable {
-                    db.checkupGuideDao().clearCheckupGuide() // Перед вставкой очистим таблицу
+                    db.qrListDao().clearCheckupGuide() // Перед вставкой очистим таблицу
                     data.guides.forEach {
-                        db.checkupGuideDao().insert(it)
+                        db.qrListDao().insert(it)
                     }
 
                 }
