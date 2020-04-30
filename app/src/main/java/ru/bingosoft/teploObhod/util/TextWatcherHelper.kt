@@ -7,8 +7,8 @@ import ru.bingosoft.teploObhod.models.Models
 import timber.log.Timber
 
 class TextWatcherHelper(
-    val control: Models.TemplateControl,
-    val uiCreator: UICreator,
+    private val control: Models.TemplateControl,
+    private val uiCreator: UICreator,
     val v: View
 ) : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
@@ -17,12 +17,23 @@ class TextWatcherHelper(
 
         Timber.d(s.toString())
         val posValue = control.value.indexOf(s.toString())
-        Timber.d("posValue=$posValue")
         if (control.typevalue.isNotEmpty()) {
-            val valutype = control.typevalue[posValue]
-            control.error = valutype == "2"
+            val type = control.typevalue[posValue]
+            control.error = type == "2"
             uiCreator.changeChecked(v, control)
         }
+        if (control.type == "numeric") {
+            if (control.maxRange != null && control.minRange != null) {
+                val min = control.minRange
+                val max = control.maxRange
+                val res = s.toString().toDouble()
+                if (!(res >= min!! && res <= max!!)) {
+                    control.error = true
+                    uiCreator.changeChecked(v, control)
+                }
+            }
+        }
+
 
     }
 

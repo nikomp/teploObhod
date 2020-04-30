@@ -48,6 +48,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
+                <!--Костыльный фон для ViewPager, стандартный фон растягивается нет свойства centerCrop-->
+                <ImageView
+                    android:id="@+id/backgroundPager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="240dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/placeholder" />
 
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/pager"
@@ -58,7 +70,6 @@
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
-                    android:background="@drawable/placeholder"
                     android:clipToPadding="false"
                     android:scaleType="fitXY" />
 

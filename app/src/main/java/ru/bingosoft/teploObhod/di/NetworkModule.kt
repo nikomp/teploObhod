@@ -30,8 +30,11 @@ class NetworkModule {
                     val token = sharedPrefSaver.getToken()
                     Timber.d("token=$token")
                     val newRequest = chain.request().newBuilder()
+                        //.addHeader("Content-Type","application/json")
                         .addHeader("Authorization", token)
                         .build()
+
+                    Timber.d("newRequest=$newRequest")
 
                     return chain.proceed(newRequest)
                 }

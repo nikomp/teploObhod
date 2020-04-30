@@ -43,6 +43,7 @@ class CheckupFragment : Fragment(), CheckupContractView, View.OnClickListener {
 
     lateinit var root: View
     private lateinit var uiCreator: UICreator
+    private var blockCheckup: Boolean? = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,17 +56,20 @@ class CheckupFragment : Fragment(), CheckupContractView, View.OnClickListener {
         val view = inflater.inflate(R.layout.fragment_gallery, container, false)
         this.root = view
 
+        blockCheckup = arguments?.getBoolean("block")
         val btnSave = view.findViewById(R.id.mbSaveCheckup) as MaterialButton
         btnSave.setOnClickListener(this)
+        btnSave.isEnabled = blockCheckup!!
 
         val btnSend = view.findViewById(R.id.mbSendCheckup) as MaterialButton
         btnSend.setOnClickListener(this)
+        btnSend.isEnabled = blockCheckup!!
 
         checkupPresenter.attachView(this)
 
+
         val tag = arguments?.getBoolean("loadCheckupById")
         if (tag != null && tag == true) {
-            Timber.d("loadCheckupById")
             val checkupId = arguments?.getLong("checkupId")
             Timber.d("checkupId=$checkupId")
             if (checkupId != null) {
@@ -81,18 +85,13 @@ class CheckupFragment : Fragment(), CheckupContractView, View.OnClickListener {
         return view
     }
 
-    /*override fun onStop() {
-        Timber.d("CheckupFragment_onStop")
-        super.onStop()
-    }*/
-
     override fun dataIsLoaded(checkup: Checkup) {
         Timber.d("Checkup готов к работе")
         Timber.d(checkup.toString())
 
         photoHelper.parentFragment = this
         uiCreator = UICreator(this, checkup)
-        uiCreator.create()
+        uiCreator.create(blockCheckup!!)
 
     }
 

@@ -28,6 +28,10 @@ class Models {
         @SerializedName("uuid") var uuid: String = ""
     )
 
+    class Empty(
+        @SerializedName("empty") var uuid: String = ""
+    )
+
     class Token(
         @SerializedName("token") var token: String = "",
         @SerializedName("name") var name: String = ""
@@ -78,6 +82,8 @@ class Models {
         @SerializedName("question") var question: String = "",
         @SerializedName("hint") var hint: String = "",
         @SerializedName("resvalue") var resvalue: String = "",
+        @SerializedName("maxRange") var maxRange: Double? = null,
+        @SerializedName("minRange") var minRange: Double? = null,
 
         var answered: Boolean = false,
         var error: Boolean = false

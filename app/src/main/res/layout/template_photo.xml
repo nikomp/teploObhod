@@ -85,17 +85,6 @@
                     android:text="@string/not_dir_with_photo"
                     android:textColor="@color/error"
                     android:visibility="invisible" />
-
-                <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabCheck"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:backgroundTint="@color/colorAccent"
-                    android:clickable="true"
-                    android:focusable="true"
-                    app:fabCustomSize="32dp"
-                    app:srcCompat="@drawable/ic_check_black_8dp" />-->
             </LinearLayout>
 
 

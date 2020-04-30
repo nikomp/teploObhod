@@ -27,6 +27,7 @@ interface ApiService {
     @POST("/registryservice/plugins/execute/UnloadEmployeeDataForTheCurrentDayFromByPassCommand")
     @Headers("Content-Type: application/json")
     fun getListRoute(
+        @Body empty: RequestBody
     ): Single<Models.DataList>
 
     @GET("procs/androidAPI.php")

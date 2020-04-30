@@ -32,6 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/buttonBackground"
+        android:enabled="false"
         android:fontFamily="@font/roboto_medium"
         android:onClick="onClick"
         android:text="@string/saveCheckup"

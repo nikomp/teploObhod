@@ -28,7 +28,12 @@ class OtherUtil {
         val directory = File(dir)
         val files = directory.listFiles()
         files.forEach {
-            list.add("$dir/${it.name}")
+            if (it.length() != 0L) {
+                list.add("$dir/${it.name}")
+            } else {
+                it.delete()
+            }
+
         }
         return list
     }

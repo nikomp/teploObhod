@@ -257,6 +257,7 @@ class RouteListFragment : Fragment(), LoginContractView, RouteListContractView,
 
         // указываем слушатель свайпов пользователя
         swipeRefreshLayout.setOnRefreshListener {
+            Timber.d("swipeRefreshLayout")
             loginPresenter.syncDB()
             swipeRefreshLayout.isRefreshing = false
         }

@@ -94,9 +94,10 @@ class QRListFragment : Fragment(), QRListContractView, QRListRVClickListeners,
         }*/
 
         //Заглушка без сканера
+        // Если чеклист открывается из спсика блокируем сохранение изменений
         val idQr = 1L
         val sfm = (activity as MainActivity).supportFragmentManager
-        (activity as MainActivity).mainPresenter.openCheckup(sfm, idQr)
+        (activity as MainActivity).mainPresenter.openCheckup(sfm, idQr, enabled = false)
 
         /*val fragmentCheckup = CheckupFragment()
         val fragmentManager = this.requireActivity().supportFragmentManager

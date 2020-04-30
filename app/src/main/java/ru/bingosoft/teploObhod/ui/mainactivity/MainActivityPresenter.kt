@@ -210,7 +210,7 @@ class MainActivityPresenter @Inject constructor(
             }
     }
 
-    fun openCheckup(fragmentManager: FragmentManager, idQr: Long) {
+    fun openCheckup(fragmentManager: FragmentManager, idQr: Long, enabled: Boolean = true) {
         Timber.d("openCheckup")
         // Получим информацию о чеклисте, по orderId
         Single.fromCallable {
@@ -220,6 +220,7 @@ class MainActivityPresenter @Inject constructor(
             val bundle = Bundle()
             bundle.putBoolean("loadCheckupById", true)
             bundle.putLong("checkupId", idCheckup)
+            bundle.putBoolean("block", enabled)
 
             val fragmentCheckup = CheckupFragment()
             fragmentCheckup.arguments = bundle

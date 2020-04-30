@@ -7,6 +7,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import ru.bingosoft.teploObhod.R
 import ru.bingosoft.teploObhod.api.ApiService
@@ -122,7 +123,10 @@ class LoginPresenter @Inject constructor(
 
     fun syncDB() {
         Timber.d("syncDB")
-        disposable = syncRoute()
+        Timber.d("jsonEmpty=${Gson().toJson(Models.Empty())}")
+        val jsonEmpty = Gson().toJson(Models.Empty())
+            .toRequestBody("application/json".toMediaType())
+        disposable = syncRoute(jsonEmpty)
             .andThen(syncCheckupGuide())
             .andThen(apiService.getCheckups(action = "getCheckups"))
             .subscribeOn(Schedulers.io())
@@ -162,7 +166,7 @@ class LoginPresenter @Inject constructor(
             })
     }
 
-    private fun syncRoute(): Completable = apiService.getListRoute()
+    private fun syncRoute(jsonEmpty: RequestBody): Completable = apiService.getListRoute(jsonEmpty)
         .subscribeOn(Schedulers.io())
         .map { response ->
             if (!response.success) {

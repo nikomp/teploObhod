@@ -5,6 +5,7 @@ import android.os.Environment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ImageButton
 import android.widget.LinearLayout
@@ -33,9 +34,9 @@ import java.io.File
 class UICreator(private val parentFragment: CheckupFragment, val checkup: Checkup) {
     lateinit var controlList: Models.ControlList
 
-    val photoHelper = parentFragment.photoHelper
+    private val photoHelper = parentFragment.photoHelper
 
-    fun create() {
+    fun create(enabled: Boolean = true) {
         // Возможно чеклист был ранее сохранен, тогда берем сохраненный и восстанавливаем его
         controlList = if (checkup.textResult != null) {
             Gson().fromJson(checkup.textResult, Models.ControlList::class.java)
@@ -44,9 +45,8 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
         }
 
         val rootView = parentFragment.root
-        val checkupPresenter = parentFragment.checkupPresenter
 
-        controlList.list.forEach controls@{ it ->
+        controlList.list.forEach controls@{
             when (it.type) {
                 // Выпадающий список
                 "combobox" -> {
@@ -59,8 +59,16 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
                     templateStep.id = it.id
                     templateStep.findViewById<TextView>(R.id.question).text = it.question
 
+
                     val materialSpinner =
                         templateStep.findViewById<MaterialBetterSpinner>(R.id.android_material_design_spinner)
+
+                    materialSpinner.isEnabled = enabled
+                    if (enabled) {
+                        materialSpinner.dropDownHeight = WindowManager.LayoutParams.WRAP_CONTENT
+                    } else {
+                        materialSpinner.dropDownHeight = 0
+                    }
 
                     doAssociateParent(templateStep, rootView.findViewById(R.id.mainControl))
 
@@ -82,6 +90,8 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
                     if (it.resvalue.isNotEmpty()) {
                         materialSpinner.setText(it.resvalue)
                     }
+
+
                     // Вешаем обработчик на spinner последним, иначе сбрасывается цвет шага
                     materialSpinner.addTextChangedListener(
                         TextWatcherHelper(
@@ -96,7 +106,6 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
                 }
                 // Строковое поле ввода однострочное
                 "textinput" -> {
-                    // Строковое поле однострочное
                     val templateStep = LayoutInflater.from(rootView.context).inflate(
                         R.layout.template_textinput, rootView.parent as ViewGroup?, false
                     ) as LinearLayout
@@ -107,6 +116,44 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
 
                     val textInputLayout = templateStep.findViewById<TextInputLayout>(R.id.til)
                     textInputLayout.hint = it.hint
+                    textInputLayout.isEnabled = enabled
+
+                    val textInputEditText = templateStep.findViewById<TextInputEditText>(R.id.tiet)
+
+                    doAssociateParent(templateStep, rootView.findViewById(R.id.mainControl))
+
+                    // Если шаг чеклиста был ранее сохранен восстановим значение
+                    Timber.d("it.checked=${it.answered}")
+                    if (it.error) {
+                        changeChecked(templateStep, it) // Установим цвет шага
+                    }
+                    if (it.resvalue.isNotEmpty()) {
+                        textInputEditText.setText(it.resvalue)
+                    }
+                    // Вешаем обработчик на textInputEditText последним, иначе сбрасывается цвет шага
+                    textInputEditText.addTextChangedListener(
+                        TextWatcherHelper(
+                            it,
+                            this,
+                            templateStep
+                        )
+                    )
+
+                    return@controls
+                }
+                // Числовое поле
+                "numeric" -> {
+                    val templateStep = LayoutInflater.from(rootView.context).inflate(
+                        R.layout.template_numeric, rootView.parent as ViewGroup?, false
+                    ) as LinearLayout
+
+
+                    templateStep.id = it.id
+                    templateStep.findViewById<TextView>(R.id.question).text = it.question
+
+                    val textInputLayout = templateStep.findViewById<TextInputLayout>(R.id.til)
+                    textInputLayout.hint = it.hint
+                    textInputLayout.isEnabled = enabled
 
                     val textInputEditText = templateStep.findViewById<TextInputEditText>(R.id.tiet)
 
@@ -146,6 +193,7 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
 
                     // Обработчик для кнопки "Добавить фото"
                     val btnPhoto = templateStep.findViewById<MaterialButton>(R.id.btnPhoto)
+                    btnPhoto.isEnabled = enabled
                     val stepCheckup = it
                     btnPhoto.setOnClickListener {
                         Timber.d("Добавляем фото")
@@ -155,6 +203,13 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
                             "${checkup.guidQr}/${stepCheckup.guid}" // Сохраним id контрола для которого делаем фото
 
                         photoHelper.createPhoto(checkup.guidQr, stepCheckup)
+                    }
+
+                    val btnClearAll =
+                        templateStep.findViewById<MaterialButton>(R.id.btnPhotoDeleteAll)
+                    btnClearAll.isEnabled = enabled
+                    btnClearAll.setOnClickListener {
+                        Timber.d("Удалим все фото")
                     }
 
                     templateStep.id = it.id
@@ -178,7 +233,7 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
                         images = OtherUtil().getFilesFromDir("$storageDir")
 
                     } else {
-                        images = listOf("1.jpg")
+                        images = listOf()
                     }
 
                     val leftBtn = templateStep.findViewById(R.id.left_nav) as ImageButton
@@ -255,8 +310,8 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
                 Timber.d("combobox")
                 val controlView =
                     v.findViewById<MaterialBetterSpinner>(R.id.android_material_design_spinner)
-                //controlView.error = v.context.getString(R.string.bad_answere)
                 if (control.error) {
+                    controlView.error = v.context.getString(R.string.bad_answere)
                     controlView.setTextColor(
                         ContextCompat.getColor(
                             parentFragment.context!!,
@@ -268,10 +323,10 @@ class UICreator(private val parentFragment: CheckupFragment, val checkup: Checku
                 }
 
             }
-            "textinput" -> {
+            "numeric", "textinput" -> {
                 val controlView = v.findViewById<TextInputEditText>(R.id.tiet)
-                //controlView.error = v.context.getString(R.string.bad_answere)
                 if (control.error) {
+                    controlView.error = v.context.getString(R.string.bad_answere)
                     controlView.setTextColor(
                         ContextCompat.getColor(
                             parentFragment.context!!,
